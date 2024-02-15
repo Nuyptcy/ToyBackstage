@@ -1,5 +1,12 @@
 <template>
-  <div class="pages">
+  <div>
+    <a href="">上一頁</a>
+    <a href="">1</a>
+    <a href="">2</a>
+    <a href="">3</a>
+    <a href="">下一頁</a>
+  </div>
+  <!-- <div class="pages">
     <div class="m-auto">
       <ul class="d-flex">
         <li>
@@ -15,13 +22,13 @@
         </li>
       </ul>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script setup></script>
 
 <style scoped>
-.pages {
+/* .pages {
   margin: 0 auto;
   margin-top: 195px;
   border-radius: 60px;
@@ -47,5 +54,5 @@
       background-color: var(--button-color1);
     }
   }
-}
+} */
 </style>

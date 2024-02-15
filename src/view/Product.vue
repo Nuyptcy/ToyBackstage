@@ -1,63 +1,19 @@
 <template>
-  <div>
-    <table class="table">
+  <div class="mt-5">
+    <table class="table bg-light rounded text-center"> 
       <thead>
-        <tr class="text-center">
-          <th scope="col">商品名稱</th>
-          <th scope="col">商品圖片</th>
-          <th scope="col">商品類型</th>
-          <th scope="col">價格</th>
-          <th scope="col">庫存</th>
-          <th scope="col">操作</th>
+        <tr>
+          <th scope="col" v-for="item in headers" :key="item"> {{item}} </th>   
         </tr>
       </thead>
-      <tbody>
-        <tr class="text-center" v-for="(item, key) in productList" :key="key">
-          <th scope="row">{{ item.title }}</th>
-          <td>
-            <img :src="imgUrl" class="imgclass" />
-          </td>
-          <td>{{ item.type }}</td>
-          <td>{{ item.price }}</td>
-          <td>{{ item.amount }}</td>
-          <td>
-            <button
-              type="button"
-              class="btn editBtn"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-            >
-              編輯
-            </button>
-            <button
-              type="button"
-              class="btn deletBtn m-lg-2"
-              @click="removeProduct(key)"
-            >
-              刪除
-            </button>
-          </td>
-        </tr>
-        <!-----------------新增----------------->
-        <tr>
-          <td scope="row" colspan="8" class="text-center">
-            <button
-              data-bs-toggle="modal"
-              data-bs-target="#plus"
-              class="plus-set"
-            >
-              <i class="fas fa-plus fa-1x"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
+      <productItem/>
     </table>
-    <footer class="footer">
+    <div class="d-flex justify-content-center">
       <pagination />
-    </footer>
+    </div>
   </div>
   <!----------------------------- 編輯Modal ---------------------------------->
-  <div
+  <!-- <div
     class="modal fade"
     id="exampleModal"
     tabindex="-1"
@@ -123,9 +79,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <!----------------------------- 新增Modal ---------------------------------->
-  <div
+  <!-- <div
     class="modal fade"
     id="plus"
     tabindex="-1"
@@ -210,101 +166,84 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
 import pagination from "@/components/pagination.vue";
+import productItem from "@/components/productItem.vue";
+
 
 export default {
   components: {
     pagination,
+    productItem
   },
 
   data() {
     return {
-      imgUrl: new URL("../assets/img/機械暴龍獸.jpg", import.meta.url),
-      newName: "",
-      newType: "",
-      newPrice: "",
-      newAmount: "",
-      productList: [
-        {
-          title: "機械暴龍獸",
-          type: "模型",
-          price: "$1950",
-          amount: "10",
-        },
-      ],
+      headers:['商品名稱','商品圖片','商品類型','價格','庫存','操作']
+      // imgUrl: new URL("../assets/img/機械暴龍獸.jpg", import.meta.url),
+      // newName: "",
+      // newType: "",
+      // newPrice: "",
+      // newAmount: "",
+      ,
     };
   },
 
   methods: {
-    addProduct() {
-      let nameValue = this.newName.trim();
-      let typeValue = this.newType.trim();
-      let priceValue = this.newPrice.trim();
-      let amountValue = this.newAmount.trim();
-      if (!nameValue || !typeValue || !priceValue || !amountValue) {
-        return;
-      }
-      this.productList.push({
-        title: nameValue,
-        type: typeValue,
-        price: priceValue,
-        amount: amountValue,
-      });
-      this.newName = "";
-      this.newType = "";
-      this.newPrice = "";
-      this.newAmount = "";
-    },
-    removeProduct(key) {
-      this.productList.splice(key, 1);
-    },
-    removeImg() {
-      this;
-    },
-    fileSelected(e) {
-      const file = e.target.files.item(0);
-      const reader = new FileReader();
-      reader.addEventListener("load", this.imageLoaded);
-      reader.readAsDataURL(file);
-    },
-    imageLoaded(e) {
-      this.image = e.target.result;
-    },
-    upload() {
-      axios.post("/upload", { image: this.image });
-    },
+
+    // addProduct() {
+    //   let nameValue = this.newName.trim();
+    //   let typeValue = this.newType.trim();
+    //   let priceValue = this.newPrice.trim();
+    //   let amountValue = this.newAmount.trim();
+    //   if (!nameValue || !typeValue || !priceValue || !amountValue) {
+    //     return;
+    //   }
+    //   this.productList.push({
+    //     title: nameValue,
+    //     type: typeValue,
+    //     price: priceValue,
+    //     amount: amountValue,
+    //   });
+    //   this.newName = "";
+    //   this.newType = "";
+    //   this.newPrice = "";
+    //   this.newAmount = "";
+    // },
+    // removeProduct(key) {
+    //   this.productList.splice(key, 1);
+    // },
+    // removeImg() {
+    //   this;
+    // },
+    // fileSelected(e) {
+    //   const file = e.target.files.item(0);
+    //   const reader = new FileReader();
+    //   reader.addEventListener("load", this.imageLoaded);
+    //   reader.readAsDataURL(file);
+    // },
+    // imageLoaded(e) {
+    //   this.image = e.target.result;
+    // },
+    // upload() {
+    //   axios.post("/upload", { image: this.image });
+    // },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.table {
-  margin-top: 40px;
-  background: #fff;
-  border-radius: 10px;
-  .editBtn {
-    @include orange-button;
-  }
-  .deletBtn {
-    @include delete-button;
-  }
-  .imgclass {
-    width: 50px;
-    height: 50px;
-  }
+ 
   .plus-set {
-    border-radius: 20%;
-    border: 0px solid #fff;
     &:hover {
       background-color: var(--button-color1);
       color: #fff;
     }
   }
-}
+
 
 .modal-content {
   width: 950px;
