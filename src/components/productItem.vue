@@ -1,6 +1,6 @@
 <template>
     <tbody>
-        <tr class="bg-success" v-for="item in productList" :key="item">
+        <tr v-for="item in productList" :key="item">
             <th scope="row">{{ item.title }}</th>
             <td >
             <img :src="imgUrl" class="h-50 w-50" />
