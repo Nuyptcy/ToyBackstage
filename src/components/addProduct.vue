@@ -53,9 +53,6 @@
 <script>
 export default {
 data() {
-    return {
-        showAddModal : false,
-    }
 },
 props: {
     productList: {

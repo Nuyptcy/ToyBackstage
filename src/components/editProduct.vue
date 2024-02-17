@@ -3,7 +3,7 @@
         <div class="card" >
             <div class="border d-flex justify-content-between  align-items-center p-3">
                 <div class="bordor fs-20">編輯商品</div>
-                <button type="button" class="btn close" @click="()=>closeModal">x 
+                <button type="button" class="btn close" @click="closeModal">x 
                 </button>
                 
             </div>
@@ -52,10 +52,7 @@
 
 <script>
 export default {
-data() {
-    return {
-    }
-},
+    
 props: {
   productList: {
     type: Array,
@@ -72,13 +69,14 @@ props: {
   
 },
 methods:{
-    closeModal(){
-        this.showEditModal = false
-        console.log(this.showEditModal);
-    }
+    closeModal() {
+            this.$emit('close-modal'); 
+            //  props in  , emit out
+        }
+},
+
 }
 
-};
 </script>
 
 <style scoped>

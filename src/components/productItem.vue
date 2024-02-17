@@ -28,14 +28,14 @@
         </tr>
         <tr>
             <td colspan="6" class="text-center">
-                <button class="plus-set rounded-3" @click="showAddModal = !showAddModal">
+                <button class="plus-set rounded-3" @click="showAddModal =!showAddModal">
                     <i class="fas fa-plus fa-1x"></i>
                 </button>
             </td>
         </tr>
-        <addProduct v-if="showAddModal" :productList="productList" :showAddModal="showAddModal"/>
-        <editProduct v-if="showEditModal" :productList="productList" :showEditModal="showEditModal" />
-    </tbody>
+        <addProduct v-if="showAddModal" :productList="productList"/>
+        <editProduct v-if="showEditModal" :productList="productList" @close-modal="showEditModal = false" />   
+        </tbody>
 </template>
 
 <script>
@@ -66,7 +66,7 @@ export default {
                     amount: "10",
                 },
                 {
-                    title: "貓貓星球獸",
+                    title: "星球獸",
                     type: "模型",
                     price: "$10",
                     amount: "10",
