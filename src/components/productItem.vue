@@ -21,6 +21,7 @@
                 <button
                     type="button"
                     class="btn btn-danger m-lg-3"
+                    @click="deleteProduct(item)"
                 >
                     刪除
                 </button> 
@@ -33,7 +34,7 @@
                 </button>
             </td>
         </tr>
-        <addProduct v-if="showAddModal" :productList="productList"/>
+        <addProduct v-if="showAddModal" :productList="productList" @close-modal="showAddModal = false"/>
         <editProduct v-if="showEditModal" :productList="productList" @close-modal="showEditModal = false" />   
         </tbody>
 </template>
@@ -48,6 +49,7 @@ export default {
         addProduct,
         editProduct
     },
+
     data() {
         return {
             showAddModal: false,
@@ -72,6 +74,15 @@ export default {
                     amount: "10",
                 }
             ]
+        }
+    },
+    methods:{
+        deleteProduct(item) {
+            const index = this.productList.indexOf(item);
+                        console.log(index);
+                        if (index !== -1) {
+            this.productList.splice(index, 1);
+        }
         }
     },
 
