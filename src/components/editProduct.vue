@@ -3,7 +3,7 @@
         <div class="card" >
             <div class="border d-flex justify-content-between  align-items-center p-3">
                 <div class="bordor fs-20">編輯商品</div>
-                <button type="button" class="btn" @click="closeModal">x 
+                <button type="button" class="btn close" @click="()=>closeModal">x 
                 </button>
                 
             </div>
@@ -54,21 +54,29 @@
 export default {
 data() {
     return {
-        showAddModal : false,
     }
 },
 props: {
-    productList: {
-        type: Array, 
-        required: true 
-    }
+  productList: {
+    type: Array,
+    required: true
+  },
+  showAddModal: {
+    type: Boolean,
+    required: true
+  },
+  showEditModal: {
+    type: Boolean,
+    required: true
+  }
+  
 },
 methods:{
     closeModal(){
-        this.showAddModal = false
-    },
-
+        this.showEditModal = false
+        console.log(this.showEditModal);
     }
+}
 
 };
 </script>
@@ -93,7 +101,7 @@ height: 80vh;
 }
 
 .close{
-color: #999EA2,
+color: #999EA2;
 }
 
 
