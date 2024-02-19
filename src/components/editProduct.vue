@@ -20,15 +20,12 @@
           </div>
         </div>
         <div class="form-group row mt-3">
-          <label for="productImg" class="col-sm-2 col-form-label"
+          <label for="productImg" class="col-sm-2 col-form-label" 
             >商品圖片</label
           >
-          <div class="col-sm-10">
-            <img
-              src="../assets/img/defaultImg.jpg"
-              style="max-width: 200px; height: 100px"
-              alt=""
-            />
+          <div class="col-sm-10">   
+            <input type="file" id="productImgInput" @click="handleFileInput">
+            <img  :src="previewUrl" style="max-width: 200px; height: 100px" alt="Preview">
           </div>
         </div>
 
@@ -94,6 +91,8 @@ export default {
   emits: ["closeModal", "addProduct", "cleanEditProduct"],
   data() {
     return {
+      //預設上傳圖片
+      previewUrl: "../assets/img/defaultImg.jpg",
       productDetail: {
         title: "",
         type: "",
@@ -103,6 +102,16 @@ export default {
     };
   },
   methods: {
+    handleFileInput(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.previewUrl = reader.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    },
     closeModal() {
       this.$emit("closeModal");
     },
@@ -161,6 +170,26 @@ export default {
 }
 
 .btn-green {
-  background-color: #a5df86;
+  background-color: #73d355;
 }
+
+.btn-green:hover {
+  background-color: #5bc53b;
+}
+
+file-input {
+  position: relative;
+  display: inline-block;
+}
+
+.file-input input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+
 </style>

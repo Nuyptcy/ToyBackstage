@@ -34,8 +34,8 @@
         </tr>
         <tr>
           <td colspan="6" class="text-center">
-            <button class="plus-set rounded-3" @click="openEditModal">
-              <i class="fas fa-plus fa-1x"></i>
+            <button class="rounded-3 bg-light " @click="openEditModal">
+              <i class="fa fa-plus "></i>
             </button>
           </td>
         </tr>
@@ -82,14 +82,14 @@ export default {
         {
           id: 2,
           title: "胖胖星球獸",
-          type: "模型",
+          type: "絨毛玩偶",
           price: 10,
           stock: 10,
         },
         {
           id: 3,
           title: "貓貓星球獸",
-          type: "模型",
+          type: "絨毛玩偶",
           price: 10,
           stock: 10,
         },
@@ -106,11 +106,10 @@ export default {
 
   methods: {
     openEditModal(item) {
-      // 傳item給子層
+       // 編輯
+       // 傳item給子層
       this.eidtProductDetail = item;
       this.showEditModal = true;
-      console.log(item);
-      // 編輯
     },
     // 刪除
     deleteProduct(item) {
@@ -120,16 +119,15 @@ export default {
         this.productList.splice(index, 1);
       }
     },
+    // 新增
     addProductHandle(newProduct) {
       this.productList.push(newProduct);
     },
     //編輯
     updateProduct(updatedProduct) {
-      //
       const index = this.productList.findIndex(
         (item) => item.id === updatedProduct.id
       );
-
       if (index !== -1) {
         this.productList.splice(index, 1, updatedProduct);
         console.log(this.productList);
@@ -166,4 +164,5 @@ button i {
 .close:hover {
   color: #000;
 }
+
 </style>
